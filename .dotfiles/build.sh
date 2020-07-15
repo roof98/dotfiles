@@ -7,3 +7,8 @@ mv .bashrc .bash_aliases ~
 
 cp .config/* ~/.config
 
+if ! command -v pfetch &> /dev/null
+then
+    echo "INSTALL PFETCH FOR MEMES AND RICING"
+    exit
+fi
