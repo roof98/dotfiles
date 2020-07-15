@@ -1,5 +1,5 @@
 #startup
-neofetch
+pfetch
 
 #aliases
 alias weather='curl http://wttr.in/Manchester_NH'
