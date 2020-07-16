@@ -6,11 +6,6 @@
 
 config_version: 2
 settings:
-<<<<<<< HEAD
-  content.geolocation:
-    https://na2.docusign.net: false
-=======
->>>>>>> acfc90825f7a68b96baf1eb115800f6601c70c48
   content.notifications:
     https://www.reddit.com: false
   content.register_protocol_handler:
