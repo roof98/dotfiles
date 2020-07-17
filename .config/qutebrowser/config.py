@@ -20,3 +20,9 @@ dracula.draw.blood(c, {
 config.load_autoconfig()
 #c.content.host_blocking.lists.append( str(config.configdir) + "/blockedHosts")
 
+#adding https everywhere bindings
+# config.bind('<Ctrl-v>', 'spawn mpv {url}')
+
+
+config.bind('<o>', 'set-cmd-text -s :open -s')
+config.bind('<Shift-o>', 'set-cmd-text -s :open -st')
