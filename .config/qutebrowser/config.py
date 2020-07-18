@@ -27,4 +27,4 @@ config.load_autoconfig()
 config.bind('<o>', 'set-cmd-text -s :open -s')
 config.bind('<Shift-o>', 'set-cmd-text -s :open -st')
 
-config.bind('<v>', 'hint links spawn mpv --force-window+immediate {hint-url}')
+config.bind('<v>', 'hint links spawn mpv --force-window=immediate {hint-url}')
