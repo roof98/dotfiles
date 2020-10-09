@@ -20,6 +20,8 @@ settings:
       <Enter>: <Return>
       <Shift-Enter>: <Return>
       <Shift-Return>: <Return>
+  content.media_capture:
+    https://voice.google.com: true
   content.notifications:
     https://www.reddit.com: false
   content.register_protocol_handler:
@@ -35,6 +37,7 @@ settings:
       re: https://reddit.com/r/{}
       wi: https://en.wikipedia.org/wiki/Special:Search/{}
       yt: https://youtube.com/results?search_query={}
+      dg: https://duckduckgo.com/?q={}
   url.start_pages:
     global: https://search.snopyta.org/
   window.hide_decoration:
