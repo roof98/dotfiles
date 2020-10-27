@@ -8,3 +8,4 @@ alias ll='ls -al'
 alias upgrade='sudo pacman -Syu && yay -Syu'
 alias watch="devour mpv"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+#alias nano="micro"
