@@ -1,0 +1,6 @@
+dotfiles add [filename]
+
+dotfiles commit -m "Messaege"
+
+dotfiles push dotfiles master
+
