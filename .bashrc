@@ -139,6 +139,10 @@ ex ()
 }
 source /home/tyler/.config/broot/launcher/bash/br
 
+#adding cargo to PATH
+export CARGO_BIN=/home/tyler/.cargo/bin
+export PATH=$PATH:$CARGO_BIN
+
 if [ -f ~/.bash_aliases ]; then
    . ~/.bash_aliases
 fi
