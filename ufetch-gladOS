@@ -1,0 +1,98 @@
+#!/bin/sh
+#
+# ufetch-manjaro - tiny system info for manjaro
+
+## INFO
+#add to /usr/bin
+
+# user is already defined
+host="$(hostname)"
+os='GLaDOS'
+kernel="$(uname -sr | sed 's/^/Caroline /g')"
+uptime="$(uptime -p | sed 's/up //')"
+packages="$(pacman -Q | wc -l)"
+shell="$(basename "${SHELL}")"
+
+## UI DETECTION
+
+parse_rcs() {
+	for f in "${@}"; do
+		wm="$(tail -n 1 "${f}" 2> /dev/null | cut -d ' ' -f 2)"
+		[ -n "${wm}" ] && echo "${wm}" && return
+	done
+}
+
+rcwm="$(parse_rcs "${HOME}/.xinitrc" "${HOME}/.xsession")"
+
+ui='unknown'
+uitype='UI'
+if [ -n "${DE}" ]; then
+	ui="${DE}"
+	uitype='DE'
+elif [ -n "${WM}" ]; then
+	ui="${WM}"
+	uitype='WM'
+elif [ -n "${XDG_CURRENT_DESKTOP}" ]; then
+	ui="${XDG_CURRENT_DESKTOP}"
+	uitype='DE'
+elif [ -n "${DESKTOP_SESSION}" ]; then
+	ui="${DESKTOP_SESSION}"
+	uitype='DE'
+elif [ -n "${rcwm}" ]; then
+	ui="${rcwm}"
+	uitype='WM'
+elif [ -n "${XDG_SESSION_TYPE}" ]; then
+	ui="${XDG_SESSION_TYPE}"
+fi
+
+ui="$(basename "${ui}")"
+
+## DEFINE COLORS
+
+# probably don't change these
+if [ -x "$(command -v tput)" ]; then
+	bold="$(tput bold)"
+	black="$(tput setaf 0)"
+	red="$(tput setaf 1)"
+	green="$(tput setaf 2)"
+	yellow="$(tput setaf 3)"
+	blue="$(tput setaf 4)"
+	magenta="$(tput setaf 5)"
+	cyan="$(tput setaf 6)"
+	white="$(tput setaf 7)"
+	reset="$(tput sgr0)"
+fi
+
+# you can change these
+lc="${reset}${bold}${green}"        # labels
+nc="${reset}${bold}${green}"        # user and hostname
+ic="${reset}"                       # info
+c0="${reset}${green}"               # first color
+
+## OUTPUT
+
+cat <<EOF
+
+${c0}              .,-:;//;:=,
+${c0}           . :H@@@MM@M#H/.,+%;,            ${lc}OS:        ${ic}${os}${reset}
+${c0}        ,/X+ +M@@M@MM%=,-%HMMM@X/,         ${lc}KERNEL:    ${ic}${kernel}${reset}
+${c0}      -+@MM; \$M@@MH+-,;XMMMM@MMMM@+-       ${lc}UPTIME:    ${ic}${uptime}${reset}
+${c0}     ;@M@@M- XM@X;. -+XXXXXHHH@M@M#@/.     ${lc}SHELL:     ${ic}${shell}${reset}
+${c0}   ,%MM@@MH ,@%=             .---=-=:=,.   ${lc}${uitype}:        ${ic}${ui}${reset}
+${c0}   =@#@@@MX.,                -%HX\$$%%%:;
+${c0}  =-./@M@M$                   .;@MMMM@MM:  
+${c0}  X@/ -\$MM/                    . +MM@@@M$
+${c0} ,@M@H: :@:                    . =X#@@@@-   
+${c0} ,@@@MMX, .                    /H- ;@M@M=
+${c0} .H@@@@M@+,                    %MM+..%#$.  
+${c0}  /MMMM@MMH/.                  XM@MH; =;
+${c0}   /%+%\$XHH@$=              , .H@@@@MX,    
+${c0}    .=--------.           -%H.,@@@@@MX,
+${c0}    .%MM@@@HHHXX\$\$$%+- .:\$MMX =M@@MM%.     
+${c0}      =XMMM@MM@MM#H;,-+HMM@M+ /MMMX=
+${c0}         =%@M@M#@\$-.=\$@MM@@@M; %M%=       
+${c0}          ,:+$+-,/H#MMMMMMM@= =,
+${c0}                =++%%%%+/:-.               
+
+
+EOF
